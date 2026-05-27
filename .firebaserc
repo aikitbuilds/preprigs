@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "gen-lang-client-0686783756"
+  },
+  "targets": {
+    "gen-lang-client-0686783756": {
+      "hosting": {
+        "prepproto": [
+          "prepprotov1"
+        ],
+        "preprigs": [
+          "preprigs"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

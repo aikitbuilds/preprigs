@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0f172a;
+  /* Slate 900 */
+  --color-surface: #1e293b;
+  /* Slate 800 */
+  --color-primary: #3b82f6;
+  /* Blue 500 */
+  --color-success: #10b981;
+  /* Emerald 500 */
+  --color-alert: #ef4444;
+  /* Red 500 */
+  --font-sans: 'Inter', sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background);
+  color: #f8fafc;
+  /* Slate 50 */
+  font-family: var(--font-sans);
+}
