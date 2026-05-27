@@ -5,6 +5,6 @@ git commit -m "update %DATE% %TIME%"
 git push
 echo.
 echo  Pushed. GitHub Actions is building + deploying now.
-echo  Watch progress: https://github.com/michaelcongtran/preprigs/actions
+echo  Watch progress: https://github.com/aikitbuilds/preprigs/actions
 echo.
 pause

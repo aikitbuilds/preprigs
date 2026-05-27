@@ -10,7 +10,7 @@ git commit -m "init: PrepRigs site"
 
 echo.
 echo  Pushing to GitHub...
-git remote add origin https://github.com/michaelcongtran/preprigs.git
+git remote add origin https://github.com/aikitbuilds/preprigs.git
 git branch -M main
 git push -u origin main
 
