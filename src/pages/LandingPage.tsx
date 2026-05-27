@@ -350,20 +350,9 @@ export function LandingPage({ onEnterDemo, onNavigate, initialAuthMode, onAuthMo
 
             {/* ─── IMAGE BREAK ──────────────────────────────────────── */}
             <section className="px-5 max-w-lg mx-auto mb-10">
-                <div className="grid grid-cols-3 gap-2 rounded-2xl overflow-hidden h-36">
-                    <div className="col-span-2 overflow-hidden rounded-xl">
-                        <img src="/images/20260526_093128.jpg" alt="" className="w-full h-full object-cover" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex-1 overflow-hidden rounded-xl">
-                            <img src="/images/20260526_082429.jpg" alt="" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1 overflow-hidden rounded-xl">
-                            <img src="/images/20260522_113401.jpg" alt="" className="w-full h-full object-cover" />
-                        </div>
-                    </div>
+                <div className="rounded-2xl overflow-hidden border border-white/5">
+                    <img src="/images/field_tested.png" alt="Field Tested · Real Food · Real Gear" className="w-full object-cover" />
                 </div>
-                <p className="text-center text-xs text-slate-600 mt-2 font-mono uppercase tracking-widest">Field-tested. Real food. Real gear.</p>
             </section>
 
             {/* ─── MODULES / FEATURES ───────────────────────────────── */}
