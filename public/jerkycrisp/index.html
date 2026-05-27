@@ -855,6 +855,9 @@
   <!-- Firebase SDK (compat) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('bz1zxwNAkuI53u0Sq');</script>
 
   <script>
     // Scroll Reveal
@@ -962,6 +965,23 @@
 
       db.collection('orders').add(orderData)
         .then(() => {
+          // Send email notification
+          emailjs.send('service_y6kkj7e', 'template_abxwlcw', {
+            firstName:    orderData.firstName,
+            lastName:     orderData.lastName,
+            email:        orderData.email,
+            phone:        orderData.phone || 'N/A',
+            address:      orderData.address,
+            city:         orderData.city,
+            state:        orderData.state,
+            zip:          orderData.zip,
+            country:      orderData.country,
+            package:      orderData.package,
+            quantity:     orderData.quantity,
+            totalPrice:   orderData.totalPrice,
+            discountCode: orderData.discountCode || 'None'
+          }).catch(err => console.warn('Email notification failed:', err));
+          // Show success regardless of email result
           document.getElementById('order-form-inner').style.display = 'none';
           document.getElementById('order-success').style.display = 'block';
           document.getElementById('order-success').scrollIntoView({behavior:'smooth',block:'center'});
