@@ -150,7 +150,7 @@ export function LandingPage({ onEnterDemo, onNavigate, initialAuthMode, onAuthMo
                     {HERO_IMAGES.map((src, i) => (
                         <img key={i} src={src} alt="" className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000" style={{ opacity: heroImg === i ? 1 : 0 }} />
                     ))}
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.82) 55%, rgba(8,8,8,0.94) 100%)' }} />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(8,8,8,0.88) 0%, rgba(8,8,8,0.55) 55%, rgba(8,8,8,0.82) 100%)' }} />
                     <div className="absolute inset-0" style={{ backgroundImage: `linear-gradient(rgba(255,152,0,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,152,0,0.025) 1px, transparent 1px)`, backgroundSize: '60px 60px' }} />
                 </div>
 
@@ -216,7 +216,7 @@ export function LandingPage({ onEnterDemo, onNavigate, initialAuthMode, onAuthMo
                         {/* Image col */}
                         <div className="relative overflow-hidden md:w-1/2" style={{ minHeight: 380 }}>
                             <img src="/images/main1.jpg" alt="Jerky Crisp" className="absolute inset-0 w-full h-full object-cover" />
-                            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, rgba(17,17,17,0.9))' }} />
+                            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 70%, rgba(17,17,17,0.95))' }} />
                             <div className="absolute top-4 left-4 px-3 py-1.5 font-bold tracking-wider uppercase text-[0.62rem]" style={{ ...mono, background: C.orange, color: C.dark }}>
                                 Alpha Release
                             </div>
