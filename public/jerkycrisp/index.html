@@ -852,6 +852,10 @@
     </div>
   </footer>
 
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
   <script>
     // Scroll Reveal
     const revealEls = document.querySelectorAll('.reveal');
@@ -904,16 +908,70 @@
     document.getElementById('discount-code').addEventListener('input', updateSummary);
     updateSummary();
 
+    // Firebase Firestore order capture
+    const firebaseConfig = {
+      apiKey: "AIzaSyCNM1u_mE8j9k3LBq3mnZDGn96C9yh2DNw",
+      authDomain: "gen-lang-client-0686783756.firebaseapp.com",
+      projectId: "gen-lang-client-0686783756",
+      storageBucket: "gen-lang-client-0686783756.firebasestorage.app",
+      messagingSenderId: "942449514075",
+      appId: "1:942449514075:web:c7578453425413149fd17e"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     // Order form
     document.getElementById('order-form').addEventListener('submit', function(e){
       e.preventDefault();
       let valid = true;
       this.querySelectorAll('[required]').forEach(f => { f.style.borderColor=''; if(!f.value.trim()){ f.style.borderColor='#c0392b'; valid=false; } });
       if(!valid){ this.querySelector('[required]').scrollIntoView({behavior:'smooth',block:'center'}); return; }
-      // TODO: connect to Firebase Firestore — db.collection('orders').add(data)
-      document.getElementById('order-form-inner').style.display = 'none';
-      document.getElementById('order-success').style.display = 'block';
-      document.getElementById('order-success').scrollIntoView({behavior:'smooth',block:'center'});
+
+      // Collect form data
+      const sel = document.querySelector('.pkg-radio:checked');
+      const [pkgCount, pkgPrice, pkgName] = sel ? sel.value.split('|') : ['','',''];
+      const discountCode = document.getElementById('discount-code').value.trim().toUpperCase();
+      const basePrice = parseInt((pkgPrice||'$0').replace('$',''));
+      const finalPrice = discountCode === 'ALPHA-TEST-20' ? Math.round(basePrice * 0.8) : basePrice;
+
+      const orderData = {
+        firstName:    document.getElementById('first-name').value.trim(),
+        lastName:     document.getElementById('last-name').value.trim(),
+        email:        document.getElementById('email').value.trim(),
+        phone:        document.getElementById('phone').value.trim(),
+        address:      document.getElementById('address').value.trim(),
+        city:         document.getElementById('city').value.trim(),
+        state:        document.getElementById('state').value.trim(),
+        zip:          document.getElementById('zip').value.trim(),
+        country:      document.getElementById('country').value,
+        package:      pkgName,
+        quantity:     pkgCount,
+        basePrice:    pkgPrice,
+        discountCode: discountCode || null,
+        totalPrice:   '$' + finalPrice,
+        status:       'pending',
+        source:       'jerkycrisp-landing',
+        createdAt:    firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      // Disable button while saving
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const origText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Saving...';
+
+      db.collection('orders').add(orderData)
+        .then(() => {
+          document.getElementById('order-form-inner').style.display = 'none';
+          document.getElementById('order-success').style.display = 'block';
+          document.getElementById('order-success').scrollIntoView({behavior:'smooth',block:'center'});
+        })
+        .catch(err => {
+          console.error('Order save failed:', err);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+          alert('Something went wrong saving your order. Please try again or email us directly.');
+        });
     });
   </script>
 
